@@ -1,28 +1,29 @@
-import java.net.ServerSocket;
-import java.io.IOException;
-import java.net.Socket;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.net.*;
+import java.io.*;
 import java.util.Scanner;
+// one way message
 
 public class Client{
 
     public static void main(String[] args) {
         try {
-          System.out.println("Etablir une connexion vers le serveur ");
-          Socket socket = new Socket("localhost",1234);
-          InputStream is = socket.getInputStream();
-          OutputStream os = socket.getOutputStream();
+
+          Socket socket = new Socket("localhost",1234); // j'Etablie une Connexion
+
 
           Scanner scanner = new Scanner (System.in);
-          System.out.println("Donner un nombre");
+          System.out.println("Donnez une chaine de Cahractere");
 
-          int nb = scanner.nextInt();
+          String message = scanner.nextLine();
 
-          System.out.println("J'envoie la requette");
-          os.write(nb);
-          int rep = is.read();
-          System.out.println("Reponse = "+rep );
+          PrintWriter pr = new PrintWriter (socket.getOutputStream());
+
+          System.out.println("J'envoie le message");
+
+          pr.println(message);
+          pr.flush();
+
+
         } catch (Exception e) {
             //TODO: handle exception
             e.printStackTrace();

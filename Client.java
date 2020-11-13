@@ -12,7 +12,7 @@ public class Client{
 
 
           Scanner scanner = new Scanner (System.in);
-          System.out.println("Donnez une chaine de Cahractere");
+          System.out.println("Entrez votre message");
 
           String message = scanner.nextLine();
 
@@ -23,6 +23,16 @@ public class Client{
           pr.println(message);
           pr.flush();
 
+          System.out.println("Message envoyer");
+
+          System.out.println("J'Attends la reponse du serveur");
+          InputStreamReader in = new InputStreamReader(socket.getInputStream());
+
+          BufferedReader bf = new BufferedReader(in);
+
+          String response = bf.readLine();
+
+          System.out.println("Server : "+response);
 
         } catch (Exception e) {
             //TODO: handle exception
